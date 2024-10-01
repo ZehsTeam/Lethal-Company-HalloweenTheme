@@ -12,14 +12,17 @@ public class FlashlightReskin : ItemReskin
     [Space(5f)]
     public Light Light;
     public bool IsTorch;
-    public float FlickerSpeed = 10f;
-    public float IntensityMultiplier = 0.2f;
+    public float FlickerSpeed = 1.5f;
+    public float IntensityMultiplier = 0.4f;
 
     public override void Start()
     {
         base.Start();
 
+        if (Light == null) return;
+
         InitialLightIntensity = Light.intensity;
+        Light.enabled = false;
     }
 
     public override void LateStart()
