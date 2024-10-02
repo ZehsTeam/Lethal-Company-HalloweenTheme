@@ -25,10 +25,12 @@ internal class Plugin : BaseUnityPlugin
         harmony.PatchAll(typeof(StartOfRoundPatch));
         harmony.PatchAll(typeof(RoundManagerPatch));
         harmony.PatchAll(typeof(GrabbableObjectPatch));
+        harmony.PatchAll(typeof(FlashlightItemPatch));
         
         ConfigManager = new ConfigManager();
 
         Content.Load();
+        Content.HalloweenAssets.Initialize();
 
         ConfigHelper.SetModIcon(Content.ModIcon);
         ConfigHelper.SetModDescription("Reskin mod for vanilla moons and scrap. (This mod is still a work in progress)");

@@ -75,6 +75,11 @@ internal static class StartOfRoundPatch
         {
             if (itemReskinData.Prefab == null) continue;
 
+            if (!itemReskinData.ConfigData.Enabled.Value)
+            {
+                continue;
+            }
+
             foreach (var item in StartOfRound.Instance.allItemsList.itemsList)
             {
                 if (item.itemName != itemReskinData.ItemName) continue;
@@ -87,12 +92,7 @@ internal static class StartOfRoundPatch
                     continue;
                 }
 
-                item.verticalOffset = itemReskin.ItemProperties.VerticalOffset;
-                item.floorYOffset = itemReskin.ItemProperties.FloorYOffset;
-                item.allowDroppingAheadOfPlayer = itemReskin.ItemProperties.AllowDroppingAheadOfPlayer;
-                item.restingRotation = itemReskin.ItemProperties.RestingRotation;
-                item.rotationOffset = itemReskin.ItemProperties.RotationOffset;
-                item.positionOffset = itemReskin.ItemProperties.PositionOffset;
+                ItemHelper.SetItemProperties(item, itemReskin.ItemProperties.ToItemProperties());
             }
         }
     }

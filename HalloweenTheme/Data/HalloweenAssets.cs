@@ -10,6 +10,14 @@ public class HalloweenAssets : ScriptableObject
     public List<SpawnableOutsideObjectWithRarity> DefaultSpawnableOutsideObjects = [];
     public List<ItemReskinData> ItemReskinDataList = [];
 
+    internal void Initialize()
+    {
+        foreach (var itemReskinData in ItemReskinDataList)
+        {
+            itemReskinData.BindConfigs();
+        }
+    }
+
     public ItemReskinData GetItemReskinData(string itemName)
     {
         foreach (var itemReskinData in ItemReskinDataList)

@@ -16,6 +16,8 @@ internal class GrabbableObjectPatch
 
         if (Content.HalloweenAssets.TryGetItemReskinData(__instance.itemProperties.itemName, out ItemReskinData itemReskinData))
         {
+            if (!itemReskinData.ConfigData.Enabled.Value) return;
+
             Object.Instantiate(itemReskinData.Prefab, __instance.transform);
         }
     }

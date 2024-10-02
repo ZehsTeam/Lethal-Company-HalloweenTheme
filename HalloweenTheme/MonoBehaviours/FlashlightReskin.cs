@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace com.github.zehsteam.HalloweenTheme.MonoBehaviours;
 
@@ -11,9 +12,14 @@ public class FlashlightReskin : ItemReskin
     [Header("Flashlight")]
     [Space(5f)]
     public Light Light;
+    public AudioClip TurnOnSFX;
+    public AudioClip TurnOffSFX;
     public bool IsTorch;
     public float FlickerSpeed = 1.5f;
     public float IntensityMultiplier = 0.4f;
+    public AudioSource TorchBurnAudio;
+
+    private Coroutine _playTorchBurnAudioAfterDelayCoroutine;
 
     public override void Start()
     {
@@ -67,5 +73,31 @@ public class FlashlightReskin : ItemReskin
         }
 
         FlashlightItem.flashlightBulb = Light;
+    }
+
+    public void SwitchFlashlight(bool on)
+    {
+        if (IsTorch)
+        {
+            if (_playTorchBurnAudioAfterDelayCoroutine != null)
+            {
+                StopCoroutine(_playTorchBurnAudioAfterDelayCoroutine);
+            }
+
+            if (on)
+            {
+                _playTorchBurnAudioAfterDelayCoroutine = StartCoroutine(PlayTorchBurnAudioAfterDelay(0.8f));
+            }
+            else
+            {
+                TorchBurnAudio.Stop();
+            }
+        }
+    }
+
+    private IEnumerator PlayTorchBurnAudioAfterDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+        TorchBurnAudio.Play();
     }
 }

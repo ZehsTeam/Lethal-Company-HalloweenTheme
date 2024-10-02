@@ -91,10 +91,17 @@ internal static class Utils
     public static void DisableRenderer(Renderer renderer)
     {
         if (renderer == null) return;
-        //if (renderer.gameObject.layer == 22) return;
-        //if (renderer.gameObject.CompareTag("DoNotSet")) return;
-        //if (renderer.gameObject.CompareTag("InteractTrigger")) return;
 
         renderer.enabled = false;
+    }
+
+    public static void EnableRenderer(Renderer renderer)
+    {
+        if (renderer == null) return;
+        //if (renderer.gameObject.layer == 9) return; // InteractableObject
+        //if (renderer.gameObject.layer == 13) return; // Triggers
+        //if (renderer.gameObject.layer == 22) return; // ScanNode
+
+        renderer.enabled = true;
     }
 }

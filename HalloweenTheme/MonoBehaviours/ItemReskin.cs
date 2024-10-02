@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using com.github.zehsteam.HalloweenTheme.Data;
+using System.Collections;
 using UnityEngine;
 
 namespace com.github.zehsteam.HalloweenTheme.MonoBehaviours;
@@ -59,8 +60,8 @@ public class ItemReskin : MonoBehaviour
     public virtual void LateStart()
     {
         HideOriginalModel();
-        SetScanNodeProperties();
         SetItemProperties();
+        SetScanNodeProperties();
         SetMainBoxColliderProperties();
         SetScanNodeTransformProperties();
         SetScanNodeBoxColliderProperties();
@@ -86,6 +87,18 @@ public class ItemReskin : MonoBehaviour
         }
     }
 
+    private void SetItemProperties()
+    {
+        if (GrabbableObject == null) return;
+
+        if (ItemProperties == null || !ItemProperties.Enabled)
+        {
+            return;
+        }
+
+        ItemHelper.SetItemProperties(GrabbableObject.itemProperties, ItemProperties.ToItemProperties());
+    }
+
     private void SetScanNodeProperties()
     {
         if (GrabbableObject == null) return;
@@ -99,34 +112,6 @@ public class ItemReskin : MonoBehaviour
         if (scanNodeProperties == null) return;
 
         scanNodeProperties.headerText = ScanNodeProperties.HeaderText;
-    }
-
-    private void SetItemProperties()
-    {
-        if (GrabbableObject == null || GrabbableObject.itemProperties == null) return;
-        if (ItemProperties == null || !ItemProperties.Enabled) return;
-
-        if (ItemProperties.GrabSFX != null)
-        {
-            GrabbableObject.itemProperties.grabSFX = ItemProperties.GrabSFX;
-        }
-
-        if (ItemProperties.DropSFX != null)
-        {
-            GrabbableObject.itemProperties.dropSFX = ItemProperties.DropSFX;
-        }
-
-        if (ItemProperties.PocketSFX != null)
-        {
-            GrabbableObject.itemProperties.pocketSFX = ItemProperties.PocketSFX;
-        }
-
-        GrabbableObject.itemProperties.verticalOffset = ItemProperties.VerticalOffset;
-        GrabbableObject.itemProperties.floorYOffset = ItemProperties.FloorYOffset;
-        GrabbableObject.itemProperties.allowDroppingAheadOfPlayer = ItemProperties.AllowDroppingAheadOfPlayer;
-        GrabbableObject.itemProperties.restingRotation = ItemProperties.RestingRotation;
-        GrabbableObject.itemProperties.rotationOffset = ItemProperties.RotationOffset;
-        GrabbableObject.itemProperties.positionOffset = ItemProperties.PositionOffset;
     }
 
     private void SetMainBoxColliderProperties()
@@ -184,12 +169,18 @@ public class ItemReskinItemProperties
     public AudioClip GrabSFX;
     public AudioClip DropSFX;
     public AudioClip PocketSFX;
+    public AudioClip ThrowSFX;
     public float VerticalOffset;
     public int FloorYOffset;
     public bool AllowDroppingAheadOfPlayer;
     public Vector3 RestingRotation;
     public Vector3 RotationOffset;
     public Vector3 PositionOffset;
+
+    public ItemProperties ToItemProperties()
+    {
+        return new ItemProperties(GrabSFX, DropSFX, PocketSFX, ThrowSFX, VerticalOffset, FloorYOffset, AllowDroppingAheadOfPlayer, RestingRotation, RotationOffset, PositionOffset);
+    }
 }
 
 [System.Serializable]

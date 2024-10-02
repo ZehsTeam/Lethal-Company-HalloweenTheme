@@ -12,7 +12,7 @@ internal class ConfigManager
     public ConfigManager()
     {
         BindConfigs();
-        ClearUnusedEntries();
+        //ClearUnusedEntries();
     }
 
     private void BindConfigs()
