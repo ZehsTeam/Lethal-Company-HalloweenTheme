@@ -9,6 +9,9 @@ internal class ConfigManager
     // General Settings
     public ConfigEntry<bool> ExtendedLogging;
 
+    // Moon Settings
+    public ConfigEntry<bool> OverrideWeather;
+
     public ConfigManager()
     {
         BindConfigs();
@@ -21,6 +24,9 @@ internal class ConfigManager
 
         // General Settings
         ExtendedLogging = ConfigHelper.Bind("General Settings", "ExtendedLogging", defaultValue: false, requiresRestart: false, "Enable extended logging.");
+
+        // Moon Settings
+        OverrideWeather = ConfigHelper.Bind("Moon Settings", "OverrideWeather", defaultValue: true, requiresRestart: false, "If enabled, some vanilla moons will have a chance to be dark and foggy.");
     }
 
     private void ClearUnusedEntries()

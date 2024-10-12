@@ -4,6 +4,22 @@ namespace com.github.zehsteam.HalloweenTheme;
 
 internal static class Utils
 {
+    public static bool RandomPercent(float percent)
+    {
+        if (percent <= 0f) return false;
+        if (percent >= 100f) return true;
+
+        return Random.value * 100f < percent;
+    }
+
+    public static bool RandomPercent(float percent, System.Random random)
+    {
+        if (percent <= 0f) return false;
+        if (percent >= 100f) return true;
+
+        return random.NextDouble() * 100f < percent;
+    }
+
     public static void DisableGameObject(string name)
     {
         GameObject gameObject = GameObject.Find(name);

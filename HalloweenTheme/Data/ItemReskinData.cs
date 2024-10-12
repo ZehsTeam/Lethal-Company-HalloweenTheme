@@ -8,6 +8,8 @@ public class ItemReskinData
 {
     public string ItemName;
     public GameObject Prefab;
+
+    [HideInInspector]
     public ItemReskinConfigData ConfigData;
 
     public ItemReskinData(string itemName, GameObject prefab, ItemReskinConfigDataDefault defaultConfigValues = default)

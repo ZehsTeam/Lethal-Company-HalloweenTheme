@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
 
     public NavMeshData NavMeshData;
     public GameObject BrightDayPrefab;
+    public float BrightDayReplaceChance = 50f;
     public string[] ObjectsToDisable = [];
 
     private void Awake()
@@ -56,6 +57,21 @@ public class LevelManager : MonoBehaviour
     {
         if (BrightDayPrefab == null) return;
 
+        if (!Plugin.ConfigManager.OverrideWeather.Value)
+        {
+            return;
+        }
+
+        if (LevelHelper.CurrentWeather == LevelWeatherType.Foggy)
+        {
+            return;
+        }
+
+        if (!Utils.RandomPercent(BrightDayReplaceChance, new System.Random(LevelHelper.RandomMapSeed + 234)))
+        {
+            return;
+        }
+
         GameObject lightingObject = GameObject.Find("Environment/Lighting");
 
         if (lightingObject == null)
@@ -77,6 +93,9 @@ public class LevelManager : MonoBehaviour
         GameObject brightDayObject = Instantiate(BrightDayPrefab, lightingObject.transform);
         brightDayObject.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 
+        brightDayObject.name = brightDayObject.name.Replace("Clone", "").Trim();
+        oldBrightDayObject.name = $"{oldBrightDayObject.name} (Old)";
+        
         Plugin.Instance.LogInfoExtended("Set BrightDay from prefab.");
     }
 

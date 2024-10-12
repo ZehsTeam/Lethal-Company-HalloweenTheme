@@ -8,6 +8,8 @@ internal static class LevelHelper
     private static bool _spawnedHalloweenLevelPrefab;
 
     public static string PlanetName => StartOfRound.Instance.currentLevel.PlanetName;
+    public static LevelWeatherType CurrentWeather => StartOfRound.Instance.currentLevel.currentWeather;
+    public static int RandomMapSeed => StartOfRound.Instance.randomMapSeed;
 
     public static void Reset()
     {

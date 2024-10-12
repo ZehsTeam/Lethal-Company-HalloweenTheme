@@ -31,9 +31,6 @@ internal class Plugin : BaseUnityPlugin
 
         Content.Load();
         Content.HalloweenAssets.Initialize();
-
-        ConfigHelper.SetModIcon(Content.ModIcon);
-        ConfigHelper.SetModDescription("Reskin mod for vanilla moons and scrap. (This mod is still a work in progress)");
     }
 
     public void OnLevelLoaded()
