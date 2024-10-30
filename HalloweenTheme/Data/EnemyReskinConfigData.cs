@@ -34,7 +34,7 @@ public class EnemyReskinConfigData
 
         string section = $"Enemy Reskins";
 
-        Enabled = ConfigHelper.Bind(section, $"{EnemyReskinData.EnemyName} | Enabled", defaultValue: DefaultValues.Enabled, requiresRestart: true, $"Enable {EnemyReskinData.EnemyName} reskin.");
+        Enabled = ConfigHelper.Bind(section, $"{EnemyReskinData.EnemyName} | Enabled", defaultValue: DefaultValues.Enabled, requiresRestart: false, $"Enable {EnemyReskinData.EnemyName} reskin.");
     }
 }
 

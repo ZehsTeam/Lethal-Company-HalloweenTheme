@@ -7,8 +7,8 @@
     
     <AssemblyName>com.github.zehsteam.$(MSBuildProjectName)</AssemblyName> <!-- PLUGIN_GUID -->
     <Product>$(MSBuildProjectName)</Product>                               <!-- PLUGIN_NAME -->
-    <Version>1.1.3</Version>                                               <!-- PLUGIN_VERSION -->
-    <Description>Reskin mod for vanilla moons, scrap, and equipment to make them more spooky.</Description>
+    <Version>1.2.0</Version>                                               <!-- PLUGIN_VERSION -->
+    <Description>Reskin mod for vanilla moons, enemies, scrap, and equipment to make them more spooky. (11 moons, 1 enemy, 37 scrap, 2 equipment)</Description>
     
     <RootNamespace>com.github.zehsteam.$(MSBuildProjectName)</RootNamespace>
     
