@@ -1,4 +1,5 @@
-﻿using Unity.AI.Navigation;
+﻿using com.github.zehsteam.HalloweenTheme.Data;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,17 +7,9 @@ namespace com.github.zehsteam.HalloweenTheme.MonoBehaviours;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance;
-
     public NavMeshData NavMeshData;
     public GameObject BrightDayPrefab;
-    public float BrightDayReplaceChance = 50f;
     public string[] ObjectsToDisable = [];
-
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-    }
 
     private void Start()
     {
@@ -33,7 +26,7 @@ public class LevelManager : MonoBehaviour
 
         if (navMeshSurface == null)
         {
-            Plugin.logger.LogError($"Failed to set NavMeshData. NavMeshSurface is null.");
+            Plugin.Logger.LogError($"Failed to set NavMeshData. NavMeshSurface is null.");
             return;
         }
 
@@ -57,7 +50,15 @@ public class LevelManager : MonoBehaviour
     {
         if (BrightDayPrefab == null) return;
 
-        if (!Plugin.ConfigManager.OverrideWeather.Value)
+        MoonReskinData moonReskinData = Content.HalloweenAssets.GetMoonReskinData(LevelHelper.PlanetName);
+        if (moonReskinData == null) return;
+
+        if (moonReskinData.DisableWeatherOverride)
+        {
+            return;
+        }
+
+        if (!moonReskinData.ConfigData.OverrideWeather.Value)
         {
             return;
         }
@@ -67,7 +68,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        if (!Utils.RandomPercent(BrightDayReplaceChance, new System.Random(LevelHelper.RandomMapSeed + 234)))
+        if (!Utils.RandomPercent(moonReskinData.ConfigData.OverrideWeatherChance.Value, new System.Random(LevelHelper.RandomMapSeed + 234)))
         {
             return;
         }
@@ -76,7 +77,7 @@ public class LevelManager : MonoBehaviour
 
         if (lightingObject == null)
         {
-            Plugin.logger.LogError("Failed to set bright day prefab. Lighting GameObject could not be found.");
+            Plugin.Logger.LogError("Failed to set bright day prefab. Lighting GameObject could not be found.");
             return;
         }
 
@@ -84,7 +85,7 @@ public class LevelManager : MonoBehaviour
 
         if (oldBrightDayObject == null)
         {
-            Plugin.logger.LogError("Failed to set bright day prefab. BrightDay GameObject could not be found.");
+            Plugin.Logger.LogError("Failed to set bright day prefab. BrightDay GameObject could not be found.");
             return;
         }
 
@@ -107,7 +108,7 @@ public class LevelManager : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Plugin.logger.LogError($"Failed to get NavMeshSurface.\n\n{e}");
+            Plugin.Logger.LogError($"Failed to get NavMeshSurface.\n\n{e}");
         }
 
         return null;

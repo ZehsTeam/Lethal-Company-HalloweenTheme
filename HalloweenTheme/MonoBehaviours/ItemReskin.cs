@@ -172,7 +172,7 @@ public class ItemReskinItemProperties
     public AudioClip ThrowSFX;
     public float VerticalOffset;
     public int FloorYOffset;
-    public bool AllowDroppingAheadOfPlayer;
+    public bool AllowDroppingAheadOfPlayer = true;
     public Vector3 RestingRotation;
     public Vector3 RotationOffset;
     public Vector3 PositionOffset;

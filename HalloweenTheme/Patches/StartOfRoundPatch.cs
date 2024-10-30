@@ -38,11 +38,9 @@ internal static class StartOfRoundPatch
     {
         List<SpawnableOutsideObjectWithRarity> spawnableOutsideObjects = Content.HalloweenAssets.DefaultSpawnableOutsideObjects;
 
-        LevelData levelData = LevelHelper.GetLevelData();
-        
-        if (levelData != null)
+        if (Content.HalloweenAssets.TryGetMoonReskinData(LevelHelper.PlanetName, out MoonReskinData moonReskinData))
         {
-            spawnableOutsideObjects = levelData.SpawnableOutsideObjects;
+            spawnableOutsideObjects = moonReskinData.SpawnableOutsideObjects;
         }
 
         foreach (var newSpawnableOutsideObject in spawnableOutsideObjects)

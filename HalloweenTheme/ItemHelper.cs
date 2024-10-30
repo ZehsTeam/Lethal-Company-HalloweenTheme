@@ -23,7 +23,7 @@ internal static class ItemHelper
 
         if (item == null)
         {
-            Plugin.logger.LogError($"Failed to set item properties for \"{itemName}\". Could not find item.");
+            Plugin.Logger.LogError($"Failed to set item properties for \"{itemName}\". Could not find item.");
             return;
         }
 
@@ -34,13 +34,13 @@ internal static class ItemHelper
     {
         if (item == null)
         {
-            Plugin.logger.LogError($"Failed to set item properties. Item is null.");
+            Plugin.Logger.LogError($"Failed to set item properties. Item is null.");
             return;
         }
 
         if (itemProperties == null)
         {
-            Plugin.logger.LogError($"Failed to set item properties for \"{item.itemName}\". ItemProperties is null.");
+            Plugin.Logger.LogError($"Failed to set item properties for \"{item.itemName}\". ItemProperties is null.");
             return;
         }
 

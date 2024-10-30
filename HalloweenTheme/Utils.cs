@@ -26,7 +26,7 @@ internal static class Utils
 
         if (gameObject == null)
         {
-            Plugin.logger.LogWarning($"Failed to disable GameObject \"{name}\". GameObject could not be found.");
+            Plugin.Logger.LogWarning($"Failed to disable GameObject \"{name}\". GameObject could not be found.");
             return;
         }
 
@@ -39,7 +39,7 @@ internal static class Utils
 
         if (gameObject == null)
         {
-            Plugin.logger.LogWarning($"Failed to hide GameObject \"{name}\". GameObject could not be found.");
+            Plugin.Logger.LogWarning($"Failed to hide GameObject \"{name}\". GameObject could not be found.");
             return;
         }
 
@@ -50,7 +50,7 @@ internal static class Utils
     {
         if (gameObject == null)
         {
-            Plugin.logger.LogWarning($"Failed to hide GameObject. GameObject could not be found.");
+            Plugin.Logger.LogWarning($"Failed to hide GameObject. GameObject could not be found.");
             return;
         }
 
@@ -71,7 +71,7 @@ internal static class Utils
 
         if (gameObject == null)
         {
-            Plugin.logger.LogWarning($"Failed to disable colliders on GameObject \"{name}\". GameObject could not be found.");
+            Plugin.Logger.LogWarning($"Failed to disable colliders on GameObject \"{name}\". GameObject could not be found.");
             return;
         }
 
@@ -82,7 +82,7 @@ internal static class Utils
     {
         if (gameObject == null)
         {
-            Plugin.logger.LogWarning($"Failed to disable colliders on GameObject. GameObject is null.");
+            Plugin.Logger.LogWarning($"Failed to disable colliders on GameObject. GameObject is null.");
             return;
         }
 

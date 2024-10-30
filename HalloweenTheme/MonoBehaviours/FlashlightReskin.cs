@@ -47,7 +47,19 @@ public class FlashlightReskin : ItemReskin
     {
         if (FlashlightItem == null) return;
         if (Light == null) return;
-        if (!IsTorch) return;
+
+        if (IsTorch)
+        {
+            Torch_Update();
+        }
+    }
+
+    private void Torch_Update()
+    {
+        if (TorchBurnAudio != null)
+        {
+            TorchBurnAudio.mute = FlashlightItem.isPocketed;
+        }
 
         if (!FlashlightItem.isBeingUsed) return;
 
@@ -77,6 +89,8 @@ public class FlashlightReskin : ItemReskin
 
     public void SwitchFlashlight(bool on)
     {
+        if (TorchBurnAudio == null) return;
+
         if (IsTorch)
         {
             if (_playTorchBurnAudioAfterDelayCoroutine != null)

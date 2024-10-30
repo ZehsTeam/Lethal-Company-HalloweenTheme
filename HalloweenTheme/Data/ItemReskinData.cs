@@ -1,16 +1,14 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace com.github.zehsteam.HalloweenTheme.Data;
 
-[Serializable]
+[System.Serializable]
 public class ItemReskinData
 {
     public string ItemName;
     public GameObject Prefab;
 
-    [HideInInspector]
-    public ItemReskinConfigData ConfigData;
+    public ItemReskinConfigData ConfigData { get; private set; }
 
     public ItemReskinData(string itemName, GameObject prefab, ItemReskinConfigDataDefault defaultConfigValues = default)
     {
@@ -21,11 +19,7 @@ public class ItemReskinData
 
     public void BindConfigs()
     {
-        if (ConfigData == null)
-        {
-            ConfigData = new ItemReskinConfigData();
-        }
-
-        ConfigData.BindConfigs(ItemName);
+        ConfigData ??= new ItemReskinConfigData();
+        ConfigData.BindConfigs(this);
     }
 }

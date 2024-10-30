@@ -26,35 +26,26 @@ internal static class LevelHelper
 
     private static void SpawnHalloweenLevelPrefab()
     {
-        LevelData levelData = GetLevelData();
-        if (levelData == null) return;
-        if (levelData.LevelPrefab == null) return;
+        MoonReskinData moonReskinData = Content.HalloweenAssets.GetMoonReskinData(PlanetName);
+        if (moonReskinData == null) return;
+
+        if (!moonReskinData.ConfigData.Enabled.Value)
+        {
+            return;
+        }
 
         GameObject environmentObject = GameObject.Find("Environment");
 
         if (environmentObject == null)
         {
-            Plugin.logger.LogError("Failed to spawn halloween level prefab. Environment GameObject could not be found.");
+            Plugin.Logger.LogError("Failed to spawn halloween level prefab. Environment GameObject could not be found.");
             return;
         }
 
-        GameObject halloweenLevel = Object.Instantiate(levelData.LevelPrefab, environmentObject.transform);
+        GameObject halloweenLevel = Object.Instantiate(moonReskinData.Prefab, environmentObject.transform);
         halloweenLevel.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 
-        Plugin.Instance.LogInfoExtended($"Spawned halloween level prefab \"{levelData.LevelPrefab.name}\".");
-    }
-
-    public static LevelData GetLevelData()
-    {
-        foreach (var levelData in Content.HalloweenAssets.LevelDataList)
-        {
-            if (levelData.PlanetName == PlanetName)
-            {
-                return levelData;
-            }
-        }
-
-        return null;
+        Plugin.Instance.LogInfoExtended($"Spawned halloween level prefab \"{moonReskinData.Prefab.name}\".");
     }
 
     public static EntranceTeleport GetEntranceTeleport(int entranceId, bool isEntranceToBuilding = true)

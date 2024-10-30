@@ -1,14 +1,15 @@
 ﻿using BepInEx.Configuration;
-using System;
 
 namespace com.github.zehsteam.HalloweenTheme.Data;
 
-[Serializable]
+[System.Serializable]
 public class ItemReskinConfigData
 {
     public ItemReskinConfigDataDefault DefaultValues { get; private set; }
 
     public ConfigEntry<bool> Enabled { get; private set; }
+
+    public ItemReskinData ItemReskinData { get; private set; }
 
     public ItemReskinConfigData()
     {
@@ -20,17 +21,24 @@ public class ItemReskinConfigData
         DefaultValues = defaultValues;
     }
 
-    public void BindConfigs(string itemName)
+    public void BindConfigs(ItemReskinData itemReskinData)
     {
         DefaultValues ??= new ItemReskinConfigDataDefault();
 
-        string section = $"{itemName} Reskin Settings";
+        if (itemReskinData == null)
+        {
+            return;
+        }
 
-        Enabled = ConfigHelper.Bind(section, "Enabled", defaultValue: DefaultValues.Enabled, requiresRestart: true, $"Enable {itemName} reskin. Requires a full game restart for changes to apply.");
+        ItemReskinData = itemReskinData;
+
+        string section = $"Item Reskins";
+
+        Enabled = ConfigHelper.Bind(section, $"{ItemReskinData.ItemName} | Enabled", defaultValue: DefaultValues.Enabled, requiresRestart: true, $"Enable {ItemReskinData.ItemName} reskin. (Requires a full game restart for changes to fully apply!)");
     }
 }
 
-[Serializable]
+[System.Serializable]
 public class ItemReskinConfigDataDefault
 {
     public bool Enabled = true;

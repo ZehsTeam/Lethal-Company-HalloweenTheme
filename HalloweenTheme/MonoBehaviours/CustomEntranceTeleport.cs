@@ -14,7 +14,7 @@ public class CustomEntranceTeleport : MonoBehaviour
 
         if (entranceTeleport == null)
         {
-            Plugin.logger.LogError($"Failed to set custom entrance teleport. EntranceTeleport is null. (EntranceId: {EntranceId}, IsEntranceToBuilding: {IsEntranceToBuilding})");
+            Plugin.Logger.LogError($"Failed to set custom entrance teleport. EntranceTeleport is null. (EntranceId: {EntranceId}, IsEntranceToBuilding: {IsEntranceToBuilding})");
             return;
         }
 

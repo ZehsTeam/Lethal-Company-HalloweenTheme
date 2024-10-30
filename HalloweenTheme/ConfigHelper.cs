@@ -1,28 +1,10 @@
 ﻿using BepInEx.Configuration;
 using com.github.zehsteam.HalloweenTheme.Dependencies;
-using System;
-using UnityEngine;
 
 namespace com.github.zehsteam.HalloweenTheme;
 
 internal static class ConfigHelper
 {
-    public static void SetModIcon(Sprite sprite)
-    {
-        if (LethalConfigProxy.Enabled)
-        {
-            LethalConfigProxy.SetModIcon(sprite);
-        }
-    }
-
-    public static void SetModDescription(string description)
-    {
-        if (LethalConfigProxy.Enabled)
-        {
-            LethalConfigProxy.SetModDescription(description);
-        }
-    }
-
     public static void SkipAutoGen()
     {
         if (LethalConfigProxy.Enabled)
@@ -31,7 +13,7 @@ internal static class ConfigHelper
         }
     }
 
-    public static ConfigEntry<T> Bind<T>(string section, string key, T defaultValue, bool requiresRestart, string description, AcceptableValueBase acceptableValues = null, Action<T> settingChanged = null, ConfigFile configFile = null)
+    public static ConfigEntry<T> Bind<T>(string section, string key, T defaultValue, bool requiresRestart, string description, AcceptableValueBase acceptableValues = null, System.Action<T> settingChanged = null, ConfigFile configFile = null)
     {
         configFile ??= Plugin.Instance.Config;
 
@@ -41,7 +23,7 @@ internal static class ConfigHelper
 
         if (settingChanged != null)
         {
-            configEntry.SettingChanged += (object sender, EventArgs e) => settingChanged?.Invoke(configEntry.Value);
+            configEntry.SettingChanged += (object sender, System.EventArgs e) => settingChanged?.Invoke(configEntry.Value);
         }
 
         if (LethalConfigProxy.Enabled)
@@ -59,7 +41,7 @@ internal static class ConfigHelper
         return configEntry;
     }
 
-    public static void AddButton(string section, string name, string description, string buttonText, Action callback)
+    public static void AddButton(string section, string name, string description, string buttonText, System.Action callback)
     {
         if (LethalConfigProxy.Enabled)
         {
